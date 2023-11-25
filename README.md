@@ -15,9 +15,9 @@ Will receive:
 
 POST to /cipp/parse_messages_from_email_alert_body with body:
 {
-    pub api_key: string,
-    pub body: string,
-    pub domain_exclusions: string[],
+    api_key: string,
+    body: string,
+    domain_exclusions: string[],
 }
 Will receive, with error_messages containing potentially one error message per skipped entry:
 {
