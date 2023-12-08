@@ -56,7 +56,7 @@ pub fn parse_messages_from_email_alert_body_v1(
             if useful_fields.len() != 2 {
                 error_messages.push(format!("Something is wrong with data extracted from row, expected exactly 2 useful fields, skipping this one in output: {:?}", useful_fields));
             } else {
-                results.push(format!("{}: ({})", useful_fields[0], useful_fields[1]))
+                results.push(format!("{} ({})", useful_fields[0], useful_fields[1]))
             }
         }
     });
