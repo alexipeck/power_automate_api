@@ -116,7 +116,7 @@ async fn parse_messages_from_cipp_alert_body(
 async fn main() {
     //Tracing
     let file =
-        tracing_appender::rolling::daily("./logs/", format!("power_automate_api{}.log", VERSION));
+        tracing_appender::rolling::daily("/logs/", format!("power_automate_api{}.log", VERSION));
     let (stdout_writer, _guard) = tracing_appender::non_blocking(stdout());
     let (file_writer, _guard) = tracing_appender::non_blocking(file);
     let logfile_layer = tracing_subscriber::fmt::layer().with_writer(file_writer);
@@ -132,7 +132,7 @@ async fn main() {
     let api_keys = Arc::new(Keys::default());
     {
         let mut api_keys_vec: Vec<String> = Vec::new();
-        match read_lines("./API_KEYS") {
+        match read_lines("/config/API_KEYS") {
             Ok(lines) => {
                 for line in lines {
                     if !line.is_empty() && line.len() > 32 {
@@ -177,7 +177,7 @@ async fn main() {
         )
         .layer(Extension(api_keys));
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 2458));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 2458));
     info!("REST API endpoint listening on {}", addr);
     tokio::select! {
         _ = bind(addr)
